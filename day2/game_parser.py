@@ -19,6 +19,9 @@ class Round:
     def is_possible(self):
         return self.red <= 12 and self.green <= 13 and self.blue <= 14
 
+    def power(self):
+        return self.red * self.green * self.blue
+
 
 @dataclass
 class Game:
@@ -34,6 +37,13 @@ class Game:
 
     def is_possible(self):
         return all(round.is_possible() for round in self.rounds)
+
+    def min_cubes_for_game(self):
+        return Round(
+            max(round.blue for round in self.rounds),
+            max(round.green for round in self.rounds),
+            max(round.red for round in self.rounds),
+        )
 
 
 def load_games():
